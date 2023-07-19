@@ -122,7 +122,7 @@ def main():
         # menu_1 = ["请选择登录或者注销","登录", "注销"]
 
         choice_1 = st.sidebar.checkbox("开始登录")
-        if choice_1 :
+        if choice_1:
             # logged_user = login_user(username,password)
             logged_user = True
             if logged_user:
