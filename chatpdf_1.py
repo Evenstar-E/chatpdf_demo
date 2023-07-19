@@ -119,10 +119,10 @@ def main():
         username = st.sidebar.text_input("用户名")
         password = st.sidebar.text_input("密码",type = "password")
 
-        menu_1 = ["请选择登录或者注销","登录", "注销"]
+        # menu_1 = ["请选择登录或者注销","登录", "注销"]
 
-        choice_1 = st.sidebar.selectbox("开始登录",menu_1)
-        if choice_1 == "登录":
+        choice_1 = st.sidebar.checkbox("开始登录")
+        if choice_1 :
             # logged_user = login_user(username,password)
             logged_user = True
             if logged_user:
@@ -205,11 +205,11 @@ def main():
                                 message(st.session_state.responses[i], key=str(i), seed='Milo', allow_html=True)
             else:
                 st.sidebar.warning("用户名或者密码不正确，请检查后重试。")
-        elif choice_1 == "注销":
-            # sql = "UPDATE users SET status = 0 WHERE username = '%s'" % (username)
-            # c.execute(sql)
-            # con.commit()
-            st.sidebar.info("您已注销，请选择登录重新登录")
+        # elif choice_1 == "注销":
+        #     # sql = "UPDATE users SET status = 0 WHERE username = '%s'" % (username)
+        #     # c.execute(sql)
+        #     # con.commit()
+        #     st.sidebar.info("您已注销，请选择登录重新登录")
         else:
             preface()
     # elif choice =="注册":
