@@ -159,16 +159,16 @@ def main():
                         for page in pdf_reader.pages:
                             text = text + page.extract_text()
 
-                        with col1:
-                            if pdf is not None:
-                                with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
-                                    fp = Path(tmp_file.name)
-                                    fp.write_bytes(pdf.getvalue())
-                                    with open(tmp_file.name, "rb") as f:
-                                        base64_pdf = base64.b64encode(f.read()).decode('utf-8')
-                                    pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" ' \
-                                                  f'width="1100" height="1500" type="application/pdf">'
-                                    st.markdown(pdf_display, unsafe_allow_html=True)
+                        # with col1:
+                        #     if pdf is not None:
+                        #         with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
+                        #             fp = Path(tmp_file.name)
+                        #             fp.write_bytes(pdf.getvalue())
+                        #             with open(tmp_file.name, "rb") as f:
+                        #                 base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+                        #             pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" ' \
+                        #                           f'width="1100" height="1500" type="application/pdf">'
+                        #             st.markdown(pdf_display, unsafe_allow_html=True)
                         text_splitter = CharacterTextSplitter(
                             chunk_size=1000,
                             chunk_overlap=200,
