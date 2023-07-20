@@ -117,15 +117,13 @@ def main():
         st.sidebar.subheader("登录区域")
 
         username = st.sidebar.text_input("用户名")
-        password = st.sidebar.text_input("密码",type = "password")
+        api_key = st.sidebar.text_input("api_key")
 
         # menu_1 = ["请选择登录或者注销","登录", "注销"]
 
         choice_1 = st.sidebar.checkbox("开始登录")
         if choice_1:
-            # logged_user = login_user(username,password)
-            logged_user = True
-            if logged_user:
+            if api_key:
                 st.session_state.count += 1
 
                 if 'prompts' not in st.session_state:
@@ -176,7 +174,8 @@ def main():
                         chunks = text_splitter.split_text(text)
 
                     # create embeddings
-                        embeddings = OpenAIEmbeddings(openai_api_key="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")
+                        openai_api_key = ""+api_key
+                        embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
                         knowledge_base = FAISS.from_texts(chunks, embeddings)
 
 
@@ -186,8 +185,8 @@ def main():
                             model_name = "gpt-3.5-turbo-16k"
                             if prompt:
                                 docs = knowledge_base.similarity_search(prompt)
-                            llm = ChatOpenAI(model_name=model_name)
-                            chain = load_qa_chain(llm, chain_type="stuff",openai_api_key="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")
+                            llm = ChatOpenAI(model_name=model_name,openai_api_key=openai_api_key)
+                            chain = load_qa_chain(llm, chain_type="stuff")
                             with get_openai_callback() as cb:
                                 response = chain.run(input_documents=docs, question=prompt)
                             st.session_state.prompts.append(prompt)
@@ -204,7 +203,7 @@ def main():
                                         allow_html=True)
                                 message(st.session_state.responses[i], key=str(i), seed='Milo', allow_html=True)
             else:
-                st.sidebar.warning("用户名或者密码不正确，请检查后重试。")
+                st.sidebar.warning("请输入你的API_KEY")
         # elif choice_1 == "注销":
         #     # sql = "UPDATE users SET status = 0 WHERE username = '%s'" % (username)
         #     # c.execute(sql)
