@@ -176,7 +176,7 @@ def main():
                         chunks = text_splitter.split_text(text)
 
                     # create embeddings
-                        embeddings = OpenAIEmbeddings(openai_api_key="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")
+                        embeddings = OpenAIEmbeddings(openai_api_key="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")
                         knowledge_base = FAISS.from_texts(chunks, embeddings)
 
 
