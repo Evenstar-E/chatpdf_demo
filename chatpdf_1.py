@@ -187,7 +187,7 @@ def main():
                             if prompt:
                                 docs = knowledge_base.similarity_search(prompt)
                             llm = ChatOpenAI(model_name=model_name)
-                            chain = load_qa_chain(llm, chain_type="stuff")
+                            chain = load_qa_chain(llm, chain_type="stuff",openai_api_key="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")
                             with get_openai_callback() as cb:
                                 response = chain.run(input_documents=docs, question=prompt)
                             st.session_state.prompts.append(prompt)
