@@ -14,6 +14,8 @@ from langchain.chat_models import ChatOpenAI
 import base64
 from pathlib import Path
 import tempfile
+from streamlit.server.server import Server
+from streamlit.scriptrunner import get_script_run_ctx as get_report_ctx
 
 
 st.set_page_config(page_title="ChatPDF",page_icon="🧊",layout="wide")
@@ -135,7 +137,9 @@ def main():
                     st.sidebar.success("您已登录成功，您的用户名是 {}".format(username))
                     st.sidebar.info("退出前请点击注销")
 
-
+                    session_id = get_report_ctx().session_id
+                    sessions = Server.get_current()._session_info_by_id
+                    st.sidebar.info(f'当前在线人数：{len(sessions)}')
 
                     col2, col1 = st.columns([1, 2])
 
