@@ -14,7 +14,6 @@ from langchain.chat_models import ChatOpenAI
 import base64
 from pathlib import Path
 import tempfile
-from streamlit.scriptrunner import get_script_run_ctx as get_report_ctx
 
 
 st.set_page_config(page_title="ChatPDF",page_icon="🧊",layout="wide")
